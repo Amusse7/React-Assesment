@@ -8,6 +8,8 @@ function App() {
     const [data, setData] = useState(""); // useState has ("") and empty string as its inital value
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [search, setSearch] =useState("");
+    
 
     // useEffect to fetch the data
     useEffect(() => {
@@ -63,14 +65,18 @@ function App() {
 
     return (
         <div className="container">
-            <Search />
+            <Search search={search} setSearch={setSearch} />
+
             <div className="filters">
                 <button className="btn" onClick={sortByTitle}>Sort by Title</button>
                 <button className="btn" onClick={sortByDate}>Sort by Most Recent</button>
             </div>
 
 			<div className="data-container">
-				{data.map((item, i) => {
+				{data.filter((book) => ( 
+                    book.title.toLowerCase().includes(search.trim().toLowerCase()) 
+                    ))
+                    .map((item, i) => {
                     return (
                         <div key={i} className="book">
                             <i className="fa fa-book"></i>
@@ -81,7 +87,7 @@ function App() {
                                         ? item.isbn[0]
                                         : item.isbn
                                 }-M.jpg`}
-							alt={`Cover image for the book: ${item.title}`}
+							alt={`Cover for the book: ${item.title}`}
                             onLoad={checkImg} />
 							</div>
                             <div className="book-info">
