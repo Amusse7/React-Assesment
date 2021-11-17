@@ -22,6 +22,7 @@ function App() {
 
             setData(dataArr);
             setLoading(false);
+            setError(false);
         })();
     }, []);
 
