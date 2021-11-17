@@ -1,14 +1,9 @@
 import React from "react";
 
 
-// Create a search function that you can search for a book
-function Search() {
-
 // Create a handle search function 
     function handleSearch(e){
         e.preventDefault();
-
-    }
 
     return (
         <div>
